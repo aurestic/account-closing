@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="default_closing_template" model="account.fiscalyear.closing.template">
+        <field name="name">Cierre de Ejercicio Fiscal</field>
+    </record>
+
+    <record id="default_pyg_move" model="account.fiscalyear.closing.config.template">
+        <field name="name">Pérdidas y Ganancias</field>
+        <field name="code">PYG</field>
+        <field name="template_id" ref="account_fiscal_year_closing.default_closing_template"/>
+        <field name="move_date">last_ending</field>
+        <field name="move_type">loss_profit</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="default_pyg_loss" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Compras y Gastos</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_pyg_move"/>
+        <field name="src_accounts">6%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_pyg_profit" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Ventas e Ingresos</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_pyg_move"/>
+        <field name="src_accounts">7%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_closing_move" model="account.fiscalyear.closing.config.template">
+        <field name="name">Cierre de Ejercicio</field>
+        <field name="code">CIERRE</field>
+        <field name="template_id" ref="account_fiscal_year_closing.default_closing_template"/>
+        <field name="move_date">last_ending</field>
+        <field name="move_type">closing</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="default_default_closing_move_1" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Financiación Básica</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_closing_move"/>
+        <field name="src_accounts">1%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_default_closing_move_2" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Activo no corriente</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_closing_move"/>
+        <field name="src_accounts">2%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_default_closing_move_3" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Existencias</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_closing_move"/>
+        <field name="src_accounts">3%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_default_closing_move_4" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Acreedores y Deudores por operaciones comerciales</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_closing_move"/>
+        <field name="src_accounts">4%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_default_closing_move_5" model="account.fiscalyear.closing.mapping.template">
+        <field name="name">Cuentas Financieras</field>
+        <field name="template_config_id" ref="account_fiscal_year_closing.default_closing_move"/>
+        <field name="src_accounts">5%</field>
+        <field name="dest_account">1290%</field>
+    </record>
+
+    <record id="default_opening_move" model="account.fiscalyear.closing.config.template">
+        <field name="name">Apertura de Ejercicio</field>
+        <field name="code">APERTURA</field>
+        <field name="template_id" ref="account_fiscal_year_closing.default_closing_template"/>
+        <field name="inverse">CIERRE</field>
+        <field name="move_date">first_opening</field>
+        <field name="move_type">opening</field>
+        <field name="sequence">3</field>
+    </record>
+
+
+</odoo>
