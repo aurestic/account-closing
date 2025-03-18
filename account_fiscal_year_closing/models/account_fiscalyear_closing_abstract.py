@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountFiscalyearClosingAbstract(models.AbstractModel):
@@ -84,3 +84,10 @@ class AccountFiscalyearClosingTypeAbstract(models.AbstractModel):
         string="Account type",
         required=True,
     )
+
+    @api.model
+    def create(self, vals):
+        if "account_type_id" in vals and isinstance(vals.get("account_type_id"), list):
+            vals["account_type_id"] = vals["account_type_id"][0]
+        res = super(AccountFiscalyearClosingTypeAbstract, self).create(vals)
+        return res
